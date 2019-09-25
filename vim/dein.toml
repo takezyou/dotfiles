@@ -32,3 +32,12 @@ hook_add = '''
 	" # hide --INSERT--
 	set noshowmode
 '''
+
+# show git diff
+[[plugins]]
+repo = 'airblade/vim-gitgutter'
+
+# git wrapper
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+

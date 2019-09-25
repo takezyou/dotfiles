@@ -173,7 +173,7 @@ set helplang=ja
 "
 set autowrite
 
-set ambiwidth=double
+"set ambiwidth=double
 
 " swapファイルを作成しない
 set noswapfile
