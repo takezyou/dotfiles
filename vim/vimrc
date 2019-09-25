@@ -1,4 +1,3 @@
-"
 " takezyou vimrc
 "
 
@@ -65,7 +64,7 @@ syntax enable
 " https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-plugin-on
 " https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-indent-on
 " ファイル形式別プラグインとインデントを有効にする 
-"filetype plugin indent on
+filetype plugin indent on
 
 " バックスペースとCtrl+hで削除を有効にする
 set backspace=2
@@ -100,3 +99,93 @@ set hlsearch
 
 " undoできる最大数
 set undolevels=1000
+
+" mac os のクリップボードを共有
+set clipboard+=unnamed
+
+" カーソルが常に中央に来るようにする
+set scrolloff=100
+
+" マクロで効果発揮
+set lazyredraw
+set ttyfast
+
+" 一行が長いファイルをsyntaxを制御することで軽くする
+set synmaxcol=256
+
+" カーソルラインを表示する 
+set cursorline
+
+" 一行が長いファイルをsyntaxを制御することで軽くする
+set synmaxcol=256
+
+" カーソルラインを表示する 
+set cursorline
+
+" https://vim-jp.org/vimdoc-ja/pi_netrw.html#g:netrw_liststyle
+" netrwツリー表示を有効にする 
+let g:netrw_liststyle=3
+let g:netrw_banner=0
+let g:netrw_sizestyle='H'
+let g:netrw_timefmt='%Y/%m/%d(%a) %H:%M:%S'
+let g:netrw_preview=1
+
+" 拡張子ごとのインデントを指定する
+augroup fileTypeIndent
+	autocmd!
+	au BufRead,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
+	au BufRead,BufNewFile *.html setlocal tabstop=4 softtabstop=4 shiftwidth=4
+	au BufRead,BufNewFile *.js   setlocal tabstop=4 softtabstop=4 shiftwidth=4
+	au BufRead,BufNewFile *.vue  setlocal tabstop=4 softtabstop=4 shiftwidth=4
+augroup END
+
+" https://vim-jp.org/vimdoc-ja/options.html#'wildmode'
+" wildmenuを有効にする
+set wildmenu
+
+" grepした結果をquickfixに表示する
+augroup grepwindow
+	autocmd!
+	au QuickFixCmdPost *grep* cwindow
+augroup END
+
+" カーソルラインの位置を保存する 
+augroup cursorlineRestore
+	autocmd!
+	autocmd BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\   exe "normal! g'\"" |
+				\ endif
+augroup END
+
+" undoの保存先
+if has('persistent_undo')
+	let undo_path = expand('~/.vim/undo')
+	exe 'set undodir=' .. undo_path
+	set undofile
+endif
+
+" 矩形選択時に文字の無いところまで選択範囲を広げる
+set virtualedit=block
+
+" ヘルプの言語を日本語優先にする 
+set helplang=ja
+
+"
+set autowrite
+
+set ambiwidth=double
+
+" swapファイルを作成しない
+set noswapfile
+
+" ウィンドウサイズ自動調整を無効化
+set noequalalways
+
+" タブを常に表示
+set showtabline=2
+
+
+" key mappings
+
+" 
