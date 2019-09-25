@@ -47,6 +47,9 @@ endif
 " general settings
 "
 
+" vimrcでマルチバイト文字を使用しているため設定
+scriptencoding utf-8
+
 " ミュート
 set belloff=all
 
@@ -70,7 +73,7 @@ syntax enable
 filetype plugin indent on
 
 " バックスペースとCtrl+hで削除を有効にする
-set backspace=2
+"set backspace=2
 
 " 改行時自動インデント
 set smartindent
@@ -116,13 +119,7 @@ set ttyfast
 set synmaxcol=256
 
 " カーソルラインを表示する 
-set cursorline
-
-" 一行が長いファイルをsyntaxを制御することで軽くする
-set synmaxcol=256
-
-" カーソルラインを表示する 
-set cursorline
+"set cursorline
 
 " https://vim-jp.org/vimdoc-ja/pi_netrw.html#g:netrw_liststyle
 " netrwツリー表示を有効にする 
@@ -291,3 +288,13 @@ nnoremap gb :Buffers<CR>
 cnoremap <c-b> <S-Left>
 cnoremap <c-f> <S-Right>
 cnoremap <c-a> <Home>
+
+"
+" vim plugins
+"
+
+" ligthline
+set laststatus=2
+if !has('gui_running')
+	set t_Co=256
+endif
