@@ -1,0 +1,102 @@
+"
+" takezyou vimrc
+"
+
+" dein.vim 
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+if &runtimepath !~# '/dein.vim'
+    if !isdirectory(s:dein_repo_dir)
+        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    endif
+    execute 'set runtimepath^=' . s:dein_repo_dir
+endif
+
+if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
+    
+    " .toml file
+    let s:rc_dir = expand('~/.vim')
+    if !isdirectory(s:rc_dir)
+    	call mkdir(s:rc_dir, 'p')
+    endif
+    let s:toml = s:rc_dir . '/dein.toml'
+    let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
+    
+    " read toml and cache
+    call dein#load_toml(s:toml, {'lazy': 0})
+    call dein#load_toml(s:lazy_toml, {'lazy': 1})
+    
+    " end settings
+    call dein#end()
+    call dein#save_state()
+endif
+
+if dein#check_install()
+    call dein#install()
+endif
+
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+	call map(s:removed_plugins, "delete(v:val, 'rf')")
+	call dein#recache_runtimepath()
+endif
+
+" general settings
+
+" ミュート
+set belloff=all
+
+" 文字コード
+set encoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
+set fileformats=unix,dos,mac
+
+" Leaderキーをスペースに設定
+let g:mapleader = "\<Space>"
+
+" シンタックスを有効にする
+syntax enable
+
+" カラースキームを使う 
+"colorscheme iceberg
+
+" https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-plugin-on
+" https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-indent-on
+" ファイル形式別プラグインとインデントを有効にする 
+"filetype plugin indent on
+
+" バックスペースとCtrl+hで削除を有効にする
+set backspace=2
+
+" 改行時自動インデント
+set smartindent
+set autoindent
+
+" 自動インデントの空白の数
+set shiftwidth=4
+
+" 行番号を表示
+set number
+
+
+" https://vim-jp.org/vimdoc-ja/options.html#'tabstop'
+" タブでも常に空白を挿入
+set tabstop=4
+
+" インクリメントサーチを有効にする
+set incsearch
+
+" https://vim-jp.org/vimdoc-ja/options.html#'ignorecase'
+" 検索時大文字小文字を区別しない
+set ignorecase
+
+" https://vim-jp.org/vimdoc-ja/options.html#'smartcase'
+" 検索時に大文字を入力した場合ignorecaseが無効になる
+
+" ハイライトサーチを有効にする
+set hlsearch
+
+" undoできる最大数
+set undolevels=1000
