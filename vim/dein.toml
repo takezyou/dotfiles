@@ -1,0 +1,34 @@
+# status line
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+	let g:lightline = {
+		\ 'colorscheme': 'wombat',
+		\ 'active': {
+			\ 'left': [ ['mode', 'paste'], ['readonly', 'branchName', 'filepath', 'modified'] ]
+			\ },
+		\ 'component_function':{
+			\ 'filepath': 'FilePath',
+            \ 'branchName': 'BranchName'
+			\ },
+        \ 'separator': { 'left': '', 'right': '' },
+		\ }
+	function! BranchName()
+		if exists('*fugitive#head')
+			let branch = FugitiveHead()
+			return branch !=# '' ? '⭠ '.branch : ''
+		endif
+		return ''
+	endfunction
+	function! FilePath()
+		if winwidth(0) > 90
+			return expand("%:s")
+		else
+			return expand("%:t")
+		endif
+	endfunction
+	" # show statusbar
+	set laststatus=2
+	" # hide --INSERT--
+	set noshowmode
+'''
