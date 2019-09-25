@@ -1,3 +1,4 @@
+"
 " takezyou vimrc
 "
 
@@ -42,7 +43,9 @@ if len(s:removed_plugins) > 0
 	call dein#recache_runtimepath()
 endif
 
+"
 " general settings
+"
 
 " ミュート
 set belloff=all
@@ -78,7 +81,6 @@ set shiftwidth=4
 
 " 行番号を表示
 set number
-
 
 " https://vim-jp.org/vimdoc-ja/options.html#'tabstop'
 " タブでも常に空白を挿入
@@ -185,7 +187,107 @@ set noequalalways
 " タブを常に表示
 set showtabline=2
 
-
+"
 " key mappings
+"
 
-" 
+" ファイル保存と終了 
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q!<CR>
+
+" 検索
+nnoremap <C-G><C-G> :Ggrep <C-R><C-W><CR><CR>
+
+" 置換
+nnoremap <Leader>re :%s;\<<C-R><C-W>\>;g<Left><Left>;
+
+" visualで選択したテキストを置換する
+vnoremap <Leader>re y:%s;<C-r>=substitute(@", "<C-v><NL>", "\\\\n", "g")<CR>;;g<Left><Left>
+
+" ハイライトを削除する
+nnoremap <Esc><Esc> :nohlsearch<CR>
+
+" vimrcを開く
+nnoremap <Leader>. :new ~/.vimrc<CR>
+nnoremap <Leader>s :source ~/.vimrc<CR>
+
+" テキストオブジェクトキーマッピング 
+onoremap 8 i(
+onoremap 2 i"
+onoremap 7 i'
+onoremap @ i`
+onoremap [ i[
+onoremap { i{
+
+onoremap a8 a(
+onoremap a2 a"
+onoremap a7 a'
+onoremap a@ a`
+onoremap a[ a[
+onoremap a{ a{
+
+" visual
+nnoremap v8 vi(
+nnoremap v2 vi"
+nnoremap v7 vi'
+nnoremap v@ vi`
+nnoremap v[ vi[
+nnoremap v{ vi{
+
+nnoremap va8 va(
+nnoremap va2 va"
+nnoremap va7 va'
+nnoremap va@ va`
+nnoremap va[ va[
+nnoremap va{ va{
+
+" 行先頭と行末
+noremap H ^
+noremap L $
+
+" タブ切り替え
+nnoremap <C-l> gt
+nnoremap <C-h> gT
+
+" visual paste
+vnoremap <silent> <C-p> "0p<CR>
+
+" ターミナルを垂直で開く
+nnoremap <C-s>v :vert term ++close<CR>
+
+" ターミナルを水平で開く
+nnoremap <C-s> :bo term ++close ++rows=15<CR>
+
+" ターミナルを新しいタブページで開く
+nnoremap <C-s>t :tab term ++close<CR>
+
+" ターミナルを新しいタブページで開く
+nnoremap <C-s>g :tab term ++close grv<CR>
+
+" ターミナルノーマルモード
+tnoremap <C-w>n <C-w>N
+
+" ターミナルでウィンドウ移動
+tnoremap <silent> <C-h> <C-w>:tabprevious<CR>
+tnoremap <silent> <C-l> <C-w>:tabnext<CR>
+
+" ウィンドウリサイズ開始
+tnoremap <C-w><C-e> <C-w>:WinResizerStartResize<CR>
+
+" 単語削除
+tnoremap <C-g> <C-w>.
+
+" 上下の空白に移動
+nnoremap <C-j> }
+nnoremap <C-k> {
+
+" git status
+nnoremap gs :Gstatus<CR>
+
+" バッファ一覧
+nnoremap gb :Buffers<CR>
+
+" コマンドラインで単語移動
+cnoremap <c-b> <S-Left>
+cnoremap <c-f> <S-Right>
+cnoremap <c-a> <Home>
