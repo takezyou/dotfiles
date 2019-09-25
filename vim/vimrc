@@ -65,7 +65,7 @@ let g:mapleader = "\<Space>"
 syntax enable
 
 " カラースキームを使う 
-"colorscheme iceberg
+colorscheme tender
 
 " https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-plugin-on
 " https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-indent-on
@@ -179,7 +179,7 @@ set autowrite
 set noswapfile
 
 " ウィンドウサイズ自動調整を無効化
-set noequalalways
+" set noequalalways
 
 " タブを常に表示
 set showtabline=2
@@ -296,5 +296,11 @@ cnoremap <c-a> <Home>
 " ligthline
 set laststatus=2
 if !has('gui_running')
-	set t_Co=256
+	set t_Co=258
 endif
+
+" NERDTree
+nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+
+" winresizer
+let g:winresizer_start_key = '<C-a>'
