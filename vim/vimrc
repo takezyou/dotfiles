@@ -304,3 +304,44 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 
 " winresizer
 let g:winresizer_start_key = '<C-a>'
+
+
+" lsp
+
+" Python 
+augroup LspPython
+	au!
+	if executable('pyls')
+		au User lsp_setup call lsp#register_server({
+					\ 'name': 'pyls',
+					\ 'cmd': {server_info->['pyls']},
+					\ 'whitelist': ['python'],
+					\ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+					\ })
+	endif
+augroup END
+
+" Ruby
+augroup LspRuby
+	au!
+	if executable('solargraph')
+		au User lsp_setup call lsp#register_server({
+					\ 'name': 'solargraph',
+					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+					\ 'initialization_options': {"diagnostics": "true"},
+					\ 'whitelist': ['ruby'],
+					\ })
+	endif
+augroup END
+
+" Docker 
+augroup LspDocker
+	au!
+	if executable('docker-langserver')
+		au User lsp_setup call lsp#register_server({
+					\ 'name': 'docker-langserver',
+					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
+					\ 'whitelist': ['dockerfile'],
+					\ })
+	endif
+augroup END

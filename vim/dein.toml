@@ -81,8 +81,8 @@ hook_add = '''
 '''
 
 # linter
-[[plugins]]
-repo = 'w0rp/ale'
+#[[plugins]]
+#repo = 'w0rp/ale'
 
 # theme
 [[plugins]]
@@ -128,8 +128,8 @@ hook_add = '''
 '''
 
 # lightline ale
-[[plugins]]
-repo = 'maximbaz/lightline-ale'
+#[[plugins]]
+#repo = 'maximbaz/lightline-ale'
 
 # show git diff
 [[plugins]]
