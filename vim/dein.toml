@@ -29,15 +29,21 @@ repo = 'SirVer/ultisnips'
 [[plugins]]
 repo = 'honza/vim-snippets'
 
+# fuzzy finder
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = '0'
+
 # fzf for vim
-#[[plugins]]
-#repo = 'junegunn/fzf.vim'
+[[plugins]]
+repo = 'junegunn/fzf.vim'
 
 # markdown prview
 [[plugins]]
 repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build= 'cd app & yarn install' 
+build = 'cd app & yarn install' 
 
 # icons
 [[plugins]]
@@ -121,8 +127,6 @@ hook_add = '''
 			return expand("%:t")
 		endif
 	endfunction
-	" # show statusbar
-	set laststatus=2
 	" # hide --INSERT--
 	set noshowmode
 '''

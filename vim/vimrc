@@ -73,7 +73,7 @@ colorscheme tender
 filetype plugin indent on
 
 " バックスペースとCtrl+hで削除を有効にする
-"set backspace=2
+set backspace=2
 
 " 改行時自動インデント
 set smartindent
@@ -123,20 +123,20 @@ set synmaxcol=256
 
 " https://vim-jp.org/vimdoc-ja/pi_netrw.html#g:netrw_liststyle
 " netrwツリー表示を有効にする 
-let g:netrw_liststyle=3
-let g:netrw_banner=0
-let g:netrw_sizestyle='H'
-let g:netrw_timefmt='%Y/%m/%d(%a) %H:%M:%S'
-let g:netrw_preview=1
+" let g:netrw_liststyle=3
+" let g:netrw_banner=0
+" let g:netrw_sizestyle='H'
+" let g:netrw_timefmt='%Y/%m/%d(%a) %H:%M:%S'
+" let g:netrw_preview=1
 
 " 拡張子ごとのインデントを指定する
-augroup fileTypeIndent
-	autocmd!
-	au BufRead,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
-	au BufRead,BufNewFile *.html setlocal tabstop=4 softtabstop=4 shiftwidth=4
-	au BufRead,BufNewFile *.js   setlocal tabstop=4 softtabstop=4 shiftwidth=4
-	au BufRead,BufNewFile *.vue  setlocal tabstop=4 softtabstop=4 shiftwidth=4
-augroup END
+" augroup fileTypeIndent
+" 	autocmd!
+" 	au BufRead,BufNewFile *.php setlocal tabstop=4 softtabstop=4 shiftwidth=4
+" 	au BufRead,BufNewFile *.html setlocal tabstop=4 softtabstop=4 shiftwidth=4
+" 	au BufRead,BufNewFile *.js   setlocal tabstop=4 softtabstop=4 shiftwidth=4
+" 	au BufRead,BufNewFile *.vue  setlocal tabstop=4 softtabstop=4 shiftwidth=4
+" augroup END
 
 " https://vim-jp.org/vimdoc-ja/options.html#'wildmode'
 " wildmenuを有効にする
@@ -305,8 +305,31 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " winresizer
 let g:winresizer_start_key = '<C-a>'
 
+" fzf
+" ファイル一覧を出すときにプレビュー表示 遅かったのでコメントアウト
+" command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+nnoremap <C-P> :Files<CR>
+
+" ripgrepで検索中、?を押すとプレビュー
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
 
 " lsp
+
+"nnoremap <silent> <C-]> :LspDefinition<CR>
+nnoremap <silent> <Leader>rf :LspReferences<CR>
+nnoremap <silent> <Leader>im :LspImplementation<CR>
 
 " Python 
 augroup LspPython
