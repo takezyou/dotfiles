@@ -143,6 +143,14 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'thinca/vim-quickrun'
 
+#
+# Language
+#
 
+# Ruby
+[[plugins]]
+repo = 'tpope/vim-rails'
 
+[[plugins]]
+repo = 'alpaca-tc/vim-endwise.git'
 
