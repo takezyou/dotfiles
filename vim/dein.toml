@@ -1,3 +1,44 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# language server protocol
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+
+# async auto complete
+[[plugins]]
+repo = 'prabirshrestha/async.vim'
+
+# auto complete plugin
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete.vim'
+
+# auto complete for lsp
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-lsp.vim'
+
+# auto complete for ultisnips
+[[plugins]]
+repo = 'prabirshrestha/asyncomplete-ultisnips.vim'
+
+# snippets
+[[plugins]]
+repo = 'SirVer/ultisnips'
+
+# snippets collection
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+# fzf for vim
+#[[plugins]]
+#repo = 'junegunn/fzf.vim'
+
+# markdown prview
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build= 'cd app & yarn install' 
+
 # icons
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
@@ -86,6 +127,10 @@ hook_add = '''
 	set noshowmode
 '''
 
+# lightline ale
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+
 # show git diff
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
@@ -93,3 +138,11 @@ repo = 'airblade/vim-gitgutter'
 # git wrapper
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+# quickrun buffer source cod
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+
+
+
