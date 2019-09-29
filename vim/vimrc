@@ -179,7 +179,7 @@ set autowrite
 set noswapfile
 
 " ウィンドウサイズ自動調整を無効化
-" set noequalalways
+set noequalalways
 
 " タブを常に表示
 set showtabline=2
@@ -271,6 +271,9 @@ tnoremap <silent> <C-l> <C-w>:tabnext<CR>
 " ウィンドウリサイズ開始
 tnoremap <C-w><C-e> <C-w>:WinResizerStartResize<CR>
 
+" Ctrl-hを有効化
+" tnoremap <C-h> <Del>
+
 " 単語削除
 tnoremap <C-g> <C-w>.
 
@@ -299,6 +302,11 @@ if !has('gui_running')
 	set t_Co=258
 endif
 
+" vim-autosave:
+let g:auto_save = 1
+let g:auto_save_in_insert_mode = 0
+let g:auto_save_silent = 1
+
 " NERDTree
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 
@@ -326,6 +334,10 @@ command! -bang -nargs=* Ag
   \                 <bang>0)
 
 " lsp
+
+" log
+let g:lsp_log_verbose = 0
+let g:lsp_log_file = expand('~/vim-lsp.log')
 
 "nnoremap <silent> <C-]> :LspDefinition<CR>
 nnoremap <silent> <Leader>rf :LspReferences<CR>
