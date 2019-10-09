@@ -97,8 +97,8 @@ hook_add = '''
 '''
 
 # linter
-#[[plugins]]
-#repo = 'w0rp/ale'
+[[plugins]]
+repo = 'w0rp/ale'
 
 # theme
 [[plugins]]

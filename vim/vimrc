@@ -2,7 +2,7 @@
 " takezyou vimrc
 "
 
-" dein.vim 
+" dein.vim
 let s:dein_dir = expand('~/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
@@ -15,7 +15,7 @@ endif
 
 if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
-    
+
     " .toml file
     let s:rc_dir = expand('~/.vim')
     if !isdirectory(s:rc_dir)
@@ -23,11 +23,11 @@ if dein#load_state(s:dein_dir)
     endif
     let s:toml = s:rc_dir . '/dein.toml'
     let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
-    
+
     " read toml and cache
     call dein#load_toml(s:toml, {'lazy': 0})
     call dein#load_toml(s:lazy_toml, {'lazy': 1})
-    
+
     " end settings
     call dein#end()
     call dein#save_state()
@@ -64,12 +64,12 @@ let g:mapleader = "\<Space>"
 " シンタックスを有効にする
 syntax enable
 
-" カラースキームを使う 
+" カラースキームを使う
 colorscheme tender
 
 " https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-plugin-on
 " https://vim-jp.org/vimdoc-ja/filetype.html#:filetype-indent-on
-" ファイル形式別プラグインとインデントを有効にする 
+" ファイル形式別プラグインとインデントを有効にする
 filetype plugin indent on
 
 " バックスペースとCtrl+hで削除を有効にする
@@ -118,11 +118,11 @@ set ttyfast
 " 一行が長いファイルをsyntaxを制御することで軽くする
 set synmaxcol=256
 
-" カーソルラインを表示する 
+" カーソルラインを表示する
 "set cursorline
 
 " https://vim-jp.org/vimdoc-ja/pi_netrw.html#g:netrw_liststyle
-" netrwツリー表示を有効にする 
+" netrwツリー表示を有効にする
 " let g:netrw_liststyle=3
 " let g:netrw_banner=0
 " let g:netrw_sizestyle='H'
@@ -148,7 +148,7 @@ augroup grepwindow
 	au QuickFixCmdPost *grep* cwindow
 augroup END
 
-" カーソルラインの位置を保存する 
+" カーソルラインの位置を保存する
 augroup cursorlineRestore
 	autocmd!
 	autocmd BufReadPost *
@@ -167,7 +167,7 @@ endif
 " 矩形選択時に文字の無いところまで選択範囲を広げる
 set virtualedit=block
 
-" ヘルプの言語を日本語優先にする 
+" ヘルプの言語を日本語優先にする
 set helplang=ja
 
 "
@@ -188,7 +188,7 @@ set showtabline=2
 " key mappings
 "
 
-" ファイル保存と終了 
+" ファイル保存と終了
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>q :q!<CR>
 
@@ -208,7 +208,7 @@ nnoremap <Esc><Esc> :nohlsearch<CR>
 nnoremap <Leader>. :new ~/.vimrc<CR>
 nnoremap <Leader>s :source ~/.vimrc<CR>
 
-" テキストオブジェクトキーマッピング 
+" テキストオブジェクトキーマッピング
 onoremap 8 i(
 onoremap 2 i"
 onoremap 7 i'
@@ -333,23 +333,101 @@ command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
+" ale
+let g:ale_cache_executable_check_failures = 1
+let g:ale_change_sign_column_color = 0
+let g:ale_completion_enabled = 0
+let g:ale_cursor_detail = 1
+let g:ale_echo_cursor = 1
+let g:ale_echo_delay = 20
+let g:ale_fix_on_save = 1
+let g:ale_keep_list_window_open = 0
+let g:ale_lint_delay = 0
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_list_window_size = 10
+let g:ale_open_list = 0
+let g:ale_set_highlights = 0
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 0
+let g:ale_sign_column_always = 1
+let g:ale_use_global_executables = 1
+let g:ale_virtualtext_cursor = 0
+let g:ale_virtualtext_delay = 20
+let g:ale_warn_about_trailing_blank_lines = 1
+let g:ale_warn_about_trailing_whitespace = 1
+"" error
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+"" linters
+let g:ale_linters = {}
+let g:ale_linters.dockerfile = ['hadolint']
+let g:ale_linters.go = ['gofmt', 'go vet','golint', 'goimports', 'golangci-lint']
+let g:ale_linters.markdown = ['textlint']
+let g:ale_linters.proto = ['protoc-gen-lint']  " ['prototool', 'protoc-gen-lint']
+let g:ale_linters.python = ['flake8', 'mypy', 'pylint', 'pyls']
+let g:ale_linters.sh = ['shellcheck', 'shfmt', 'sh-language-server', 'shell']
+ let g:ale_linters.terraform = ['fmt', 'tflint']
+let g:ale_linters.yaml = ['yamllint']
+"" fixers
+let g:ale_fixers = {
+      \ '*': ['remove_trailing_lines', 'trim_whitespace'],
+      \ 'markdown': [],
+      \ }
+
+"" Sh:
+let g:ale_sh_shell_default_shell = 'bash'
+let g:ale_sh_shellcheck_options = '-x'
+let g:ale_sh_shellcheck_exclusions = 'SC1072 SC1090'
+let g:ale_sh_shfmt_options = '-s -ln bash'
+
+"" Python:
+let g:ale_yaml_yamllint_options = '--config-file=' . fnamemodify(findfile('.yamllint', '.;'), ':p')
+
+"" Dockerfile:
+let g:ale_dockerfile_hadolint_use_docker = 'yes'
+let g:ale_dockerfile_hadolint_image = 'gcr.io/container-image/cloud-builders/hadolint:1.16.0'
+
+"" LaTex
+let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:vimtex_compiler_latexmk = {
+      \ 'background': 1,
+      \ 'build_dir': '',
+      \ 'continuous': 1,
+      \ 'options': [
+      \    '-pdfdvi',
+      \    '-verbose',
+      \    '-file-line-error',
+      \    '-synctex=1',
+      \    '-interaction=nonstopmode',
+      \],
+      \}
+
 " lsp
 
 " error
-let g:lsp_signs_error = {'text': '✖'}
-let g:lsp_signs_warning = {'text': '⚠'}
-let g:lsp_signs_information = {'tex': 'ℹ'}
-let g:lsp_signs_hint= {'text': '➤'}
-let g:lsp_signs_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
+"let g:lsp_signs_error = {'text': '✖'}
+"let g:lsp_signs_warning = {'text': '⚠'}
+"let g:lsp_signs_information = {'tex': 'ℹ'}
+"let g:lsp_signs_hint= {'text': '➤'}
+"let g:lsp_signs_enabled = 1
+"let g:lsp_diagnostics_echo_cursor = 1
 
 " log
-let g:lsp_log_verbose = 0
-let g:lsp_log_file = expand('/tmp/vim-lsp.log')
+"let g:lsp_log_verbose = 0
+"let g:lsp_log_file = expand('/tmp/vim-lsp.log')
 
 "nnoremap <silent> <C-]> :LspDefinition<CR>
-nnoremap <silent> <Leader>rf :LspReferences<CR>
-nnoremap <silent> <Leader>im :LspImplementation<CR>
+"nnoremap <silent> <Leader>rf :LspReferences<CR>
+"nnoremap <silent> <Leader>im :LspImplementation<CR>
+
+" disabel lsp linter
+let g:lsp_diagnostics_enabled = 0
 
 " Go
 augroup LspGo
@@ -363,7 +441,7 @@ augroup LspGo
     endif
 augroup END
 
-" Python 
+" Python
 augroup LspPython
 	au!
 	if executable('pyls')
@@ -389,7 +467,7 @@ augroup LspRuby
 	endif
 augroup END
 
-" Docker 
+" Docker
 augroup LspDocker
 	au!
 	if executable('docker-langserver')
