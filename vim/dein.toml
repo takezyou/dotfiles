@@ -171,3 +171,20 @@ repo = 'alpaca-tc/vim-endwise.git'
 # Circleci
 [[plugins]]
 repo = 'yasuhiroki/circleci.vim'
+
+# Markdown
+[[plugins]]
+repo = 'moorereason/vim-markdownfmt'
+
+# Yaml
+[[plugins]]
+repo = 'stephpy/vim-yaml'
+
+[[plugins]]
+repo = 'mrk21/yaml-vim'
+
+# LaTex
+[[plugins]]
+repo = 'lervag/vimtex'
+
+

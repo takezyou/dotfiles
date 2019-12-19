@@ -190,7 +190,8 @@ set showtabline=2
 
 " ファイル保存と終了
 nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q!<CR>
+"nnoremap <Leader>q :q!<CR>
+nnoremap <Leader>q :wqa!<CR>
 
 " 検索
 nnoremap <C-G><C-G> :Ggrep <C-R><C-W><CR><CR>
@@ -262,7 +263,7 @@ nnoremap <C-s>t :tab term ++close<CR>
 nnoremap <C-s>g :tab term ++close grv<CR>
 
 " ターミナルノーマルモード
-tnoremap <C-w>n <C-w>N
+"tnoremap <C-w>n <C-w>N
 
 " ターミナルでウィンドウ移動
 tnoremap <silent> <C-h> <C-w>:tabprevious<CR>
@@ -333,32 +334,48 @@ command! -bang -nargs=* Ag
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
   \                 <bang>0)
 
+" latex
+let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
+let g:vimtex_view_general_options = '-r @line @pdf @tex'
+let g:vimtex_compiler_latexmk = {
+      \ 'background': 1,
+      \ 'build_dir': '',
+      \ 'continuous': 1,
+      \ 'options': [
+      \    '-pdfdvi',
+      \    '-verbose',
+      \    '-file-line-error',
+      \    '-synctex=1',
+      \    '-interaction=nonstopmode',
+      \],
+      \}
+
 " ale
-let g:ale_cache_executable_check_failures = 1
-let g:ale_change_sign_column_color = 0
-let g:ale_completion_enabled = 0
-let g:ale_cursor_detail = 1
-let g:ale_echo_cursor = 1
-let g:ale_echo_delay = 20
-let g:ale_fix_on_save = 1
-let g:ale_keep_list_window_open = 0
-let g:ale_lint_delay = 0
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_filetype_changed = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_list_window_size = 10
-let g:ale_open_list = 0
-let g:ale_set_highlights = 0
-let g:ale_set_loclist = 0
-let g:ale_set_quickfix = 0
-let g:ale_sign_column_always = 1
-let g:ale_use_global_executables = 1
-let g:ale_virtualtext_cursor = 0
-let g:ale_virtualtext_delay = 20
-let g:ale_warn_about_trailing_blank_lines = 1
-let g:ale_warn_about_trailing_whitespace = 1
+"let g:ale_cache_executable_check_failures = 1
+"let g:ale_change_sign_column_color = 0
+"let g:ale_completion_enabled = 0
+"let g:ale_cursor_detail = 1
+"let g:ale_echo_cursor = 1
+"let g:ale_echo_delay = 20
+"let g:ale_fix_on_save = 1
+"let g:ale_keep_list_window_open = 0
+"let g:ale_lint_delay = 0
+"let g:ale_lint_on_enter = 0
+"let g:ale_lint_on_filetype_changed = 0
+"let g:ale_lint_on_insert_leave = 0
+"let g:ale_lint_on_save = 1
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_list_window_size = 10
+"let g:ale_open_list = 0
+"let g:ale_set_highlights = 0
+"let g:ale_set_loclist = 0
+"let g:ale_set_quickfix = 0
+"let g:ale_sign_column_always = 1
+"let g:ale_use_global_executables = 1
+"let g:ale_virtualtext_cursor = 0
+"let g:ale_virtualtext_delay = 20
+"let g:ale_warn_about_trailing_blank_lines = 1
+"let g:ale_warn_about_trailing_whitespace = 1
 "" error
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
@@ -391,22 +408,6 @@ let g:ale_yaml_yamllint_options = '--config-file=' . fnamemodify(findfile('.yaml
 "" Dockerfile:
 let g:ale_dockerfile_hadolint_use_docker = 'yes'
 let g:ale_dockerfile_hadolint_image = 'gcr.io/container-image/cloud-builders/hadolint:1.16.0'
-
-"" LaTex
-let g:vimtex_view_general_viewer = '/Applications/Skim.app/Contents/SharedSupport/displayline'
-let g:vimtex_view_general_options = '-r @line @pdf @tex'
-let g:vimtex_compiler_latexmk = {
-      \ 'background': 1,
-      \ 'build_dir': '',
-      \ 'continuous': 1,
-      \ 'options': [
-      \    '-pdfdvi',
-      \    '-verbose',
-      \    '-file-line-error',
-      \    '-synctex=1',
-      \    '-interaction=nonstopmode',
-      \],
-      \}
 
 " lsp
 
