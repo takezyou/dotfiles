@@ -5,6 +5,10 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 
+# language server settings
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+
 # async auto complete
 [[plugins]]
 repo = 'prabirshrestha/async.vim'

@@ -314,6 +314,9 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " winresizer
 let g:winresizer_start_key = '<C-a>'
 
+" vim-gitgutter
+set updatetime=100
+
 " fzf
 " ファイル一覧を出すときにプレビュー表示 遅かったのでコメントアウト
 " command! -bang -nargs=? -complete=dir Files
@@ -409,6 +412,15 @@ let g:ale_yaml_yamllint_options = '--config-file=' . fnamemodify(findfile('.yaml
 let g:ale_dockerfile_hadolint_use_docker = 'yes'
 let g:ale_dockerfile_hadolint_image = 'gcr.io/container-image/cloud-builders/hadolint:1.16.0'
 
+" lsp settings
+let g:lsp_settings = {
+\  'pyls': {'cmd': ['pyls']},
+\  'solargraph': {'cmd': ['solargraph']},
+\  'yaml-language-server': {'cmd': ['yaml-language-server']},
+\  'vim-language-server': {'cmd': ['vim-language-server']},
+\  'docker-langserver': {'cmd': ['docker-langserver']}
+\}
+
 " lsp
 
 " error
@@ -430,52 +442,52 @@ let g:ale_dockerfile_hadolint_image = 'gcr.io/container-image/cloud-builders/had
 " disabel lsp linter
 let g:lsp_diagnostics_enabled = 0
 
-" Go
-augroup LspGo
-    au!
-    if executable('gopls')
-        au User lsp_setup call lsp#register_server({
-                    \ 'name': 'gopls',
-                    \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
-                    \ 'whitelist': ['go'],
-                    \ })
-    endif
-augroup END
-
-" Python
-augroup LspPython
-	au!
-	if executable('pyls')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'pyls',
-					\ 'cmd': {server_info->['pyls']},
-					\ 'whitelist': ['python'],
-					\ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
-					\ })
-	endif
-augroup END
-
-" Ruby
-augroup LspRuby
-	au!
-	if executable('solargraph')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'solargraph',
-					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-					\ 'initialization_options': {"diagnostics": "true"},
-					\ 'whitelist': ['ruby'],
-					\ })
-	endif
-augroup END
-
-" Docker
-augroup LspDocker
-	au!
-	if executable('docker-langserver')
-		au User lsp_setup call lsp#register_server({
-					\ 'name': 'docker-langserver',
-					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
-					\ 'whitelist': ['dockerfile'],
-					\ })
-	endif
-augroup END
+"" Go
+"augroup LspGo
+"    au!
+"    if executable('gopls')
+"        au User lsp_setup call lsp#register_server({
+"                    \ 'name': 'gopls',
+"                    \ 'cmd': {server_info->['gopls', '-mode', 'stdio']},
+"                    \ 'whitelist': ['go'],
+"                    \ })
+"    endif
+"augroup END
+"
+"" Python
+"augroup LspPython
+"	au!
+"	if executable('pyls')
+"		au User lsp_setup call lsp#register_server({
+"					\ 'name': 'pyls',
+"					\ 'cmd': {server_info->['pyls']},
+"					\ 'whitelist': ['python'],
+"					\ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+"					\ })
+"	endif
+"augroup END
+"
+"" Ruby
+"augroup LspRuby
+"	au!
+"	if executable('solargraph')
+"		au User lsp_setup call lsp#register_server({
+"					\ 'name': 'solargraph',
+"					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+"					\ 'initialization_options': {"diagnostics": "true"},
+"					\ 'whitelist': ['ruby'],
+"					\ })
+"	endif
+"augroup END
+"
+"" Docker
+"augroup LspDocker
+"	au!
+"	if executable('docker-langserver')
+"		au User lsp_setup call lsp#register_server({
+"					\ 'name': 'docker-langserver',
+"					\ 'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
+"					\ 'whitelist': ['dockerfile'],
+"					\ })
+"	endif
+"augroup END
