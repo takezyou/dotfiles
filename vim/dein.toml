@@ -9,6 +9,15 @@ repo = 'prabirshrestha/vim-lsp'
 [[plugins]]
 repo = 'mattn/vim-lsp-settings'
 
+[[plugins]]
+repo = 'mattn/vim-lsp-icons'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo = 'hrsh7th/vim-vsnip-integ'
+
 # async auto complete
 [[plugins]]
 repo = 'prabirshrestha/async.vim'
@@ -49,11 +58,9 @@ merged = '0'
 [[plugins]]
 repo = 'junegunn/fzf.vim'
 
-# markdown prview
+# markdown preview
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build = 'cd app & yarn install' 
+repo = 'skanehira/preview-markdown.vim'
 
 # icons
 [[plugins]]
@@ -96,13 +103,8 @@ hook_add = '''
 	let g:NERDTreeShowHidden = 1
 	let g:NERDTreeSortHiddenFirst = 1
 	let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$']
-	let g:ale_terraform_tflint_options = '-f json'
 	let g:NERDTreeMapUpdir=''
 '''
-
-# linter
-[[plugins]]
-repo = 'w0rp/ale'
 
 # theme
 [[plugins]]
@@ -144,10 +146,6 @@ hook_add = '''
 	" # hide --INSERT--
 	set noshowmode
 '''
-
-# lightline ale
-#[[plugins]]
-#repo = 'maximbaz/lightline-ale'
 
 # show git diff
 [[plugins]]
