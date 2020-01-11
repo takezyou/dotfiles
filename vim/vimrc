@@ -314,6 +314,9 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 " winresizer
 let g:winresizer_start_key = '<C-a>'
 
+" preview-markdown
+"let g:preview_markdown_vertical = 1
+
 " vim-gitgutter
 set updatetime=100
 
