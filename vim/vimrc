@@ -324,8 +324,8 @@ set updatetime=100
 nnoremap <C-P> :Files<CR>
 
 " ファイル一覧を出すときにプレビュー表示 遅かったのでコメントアウト
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
+"command! -bang -nargs=? -complete=dir Files
+"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
 
 " ripgrepで検索中、?を押すとプレビュー
 command! -bang -nargs=* Rg
