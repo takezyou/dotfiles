@@ -321,10 +321,11 @@ let g:winresizer_start_key = '<C-a>'
 set updatetime=100
 
 " fzf
-" ファイル一覧を出すときにプレビュー表示 遅かったのでコメントアウト
-" command! -bang -nargs=? -complete=dir Files
-"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 nnoremap <C-P> :Files<CR>
+
+" ファイル一覧を出すときにプレビュー表示 遅かったのでコメントアウト
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'source': 'ag --hidden --ignore .git -g ""'}), <bang>0)
 
 " ripgrepで検索中、?を押すとプレビュー
 command! -bang -nargs=* Rg
@@ -356,12 +357,13 @@ let g:vimtex_compiler_latexmk = {
       \],
       \}
 
+" asyncomplete
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 1
+let g:asyncomplete_popup_delay = 200
 
 " lsp
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 1
-let g:asyncomplete_popup_delay = 200
 let g:lsp_text_edit_enabled = 1
 
