@@ -318,7 +318,7 @@ let g:winresizer_start_key = '<C-a>'
 "let g:preview_markdown_vertical = 1
 
 " vim-gitgutter
-set updatetime=100
+" set updatetime=100
 
 " fzf
 nnoremap <C-P> :Files<CR>

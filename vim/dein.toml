@@ -148,12 +148,12 @@ hook_add = '''
 '''
 
 # show git diff
-[[plugins]]
-repo = 'airblade/vim-gitgutter'
-
-# git wrapper
-[[plugins]]
-repo = 'tpope/vim-fugitive'
+#[[plugins]]
+#repo = 'airblade/vim-gitgutter'
+#
+## git wrapper
+#[[plugins]]
+#repo = 'tpope/vim-fugitive'
 
 # quickrun buffer source cod
 [[plugins]]
