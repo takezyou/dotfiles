@@ -52,7 +52,6 @@ repo = 'thomasfaingnaert/vim-lsp-ultisnips'
 [[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all'
-merged = '0'
 
 # fzf for vim
 [[plugins]]
@@ -186,7 +185,7 @@ repo = 'stephpy/vim-yaml'
 repo = 'mrk21/yaml-vim'
 
 # LaTex
-[[plugins]]
-repo = 'lervag/vimtex'
+#[[plugins]]
+#repo = 'lervag/vimtex'
 
 
