@@ -81,9 +81,9 @@ repo = 'vim-scripts/vim-auto-save'
 [[plugins]]
 repo = 'simeji/winresizer'
 
-# filer vaffle
-#[[plugins]]
-#repo = 'cocopon/vaffle.vim'
+# start screen
+[[plugins]]
+repo = 'mhinz/vim-startify'
 
 # filer nerd
 [[plugins]]
@@ -145,14 +145,6 @@ hook_add = '''
 	set noshowmode
 '''
 
-# show git diff
-#[[plugins]]
-#repo = 'airblade/vim-gitgutter'
-#
-## git wrapper
-#[[plugins]]
-#repo = 'tpope/vim-fugitive'
-
 # quickrun buffer source cod
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -182,9 +174,3 @@ repo = 'stephpy/vim-yaml'
 
 [[plugins]]
 repo = 'mrk21/yaml-vim'
-
-# LaTex
-#[[plugins]]
-#repo = 'lervag/vimtex'
-
-
