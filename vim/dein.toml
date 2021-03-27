@@ -90,15 +90,18 @@ repo = 'mhinz/vim-startify'
 repo = 'scrooloose/nerdtree'
 on_cmd =  ['NERDTree', 'NERDTreeVCS', 'NERDTreeFromBookmark', 'NERDTreeToggle', 'NERDTreeFocus', 'NERDTreeMirror', 'NERDTreeClose', 'NERDTreeFind', 'NERDTreeCWD', 'NERDTreeRefreshRoot']
 hook_add = '''
+    autocmd vimenter * NERDTree
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * NERDTree | if argc() > 0 || exists("s:std_in") | wincmd p | endif
 	let g:NERDTreeAutoDeleteBuffer = 1
 	let g:NERDTreeWinSize = 20
 	let g:NERDTreeDirArrows = 1
 	let g:NERDTreeHijackNetrw = 0
-	let g:NERDTreeMinimalUI = 1
+	let g:NERDTreeMinimalUI = 0
 	let g:NERDTreeMouseMode = 1
 	let g:NERDTreeQuitOnOpen = 0
 	let g:NERDTreeRespectWildIgnore = 1
-	let g:NERDTreeShowHidden = 1
+	let g:NERDTreeShowHidden = 0
 	let g:NERDTreeSortHiddenFirst = 1
 	let g:NERDTreeIgnore=['\.git$', '\.clean$', '\.swp$', '\.bak$', '\~$', '\.DS_Store']
 	let g:NERDTreeMapUpdir=''

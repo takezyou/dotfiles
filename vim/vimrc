@@ -216,8 +216,8 @@ nnoremap <C-s>g :tab term ++close grv<CR>
 "tnoremap <C-w>n <C-w>N
 
 " ターミナルでウィンドウ移動
-tnoremap <silent> <C-h> <C-w>:tabprevious<CR>
-tnoremap <silent> <C-l> <C-w>:tabnext<CR>
+" tnoremap <silent> <C-h> <C-w>:tabprevious<CR>
+" tnoremap <silent> <C-l> <C-w>:tabnext<CR>
 
 " ウィンドウリサイズ開始
 tnoremap <C-w><C-e> <C-w>:WinResizerStartResize<CR>
@@ -270,7 +270,8 @@ let g:auto_save_in_insert_mode = 0
 let g:auto_save_silent = 1
 
 " NERDTree
-nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+" nnoremap <silent> <C-e> :NERDTreeToggle<CR>
+nnoremap <leader>n  :NERDTreeFocus<CR>
 
 " winresizer
 let g:winresizer_start_key = '<C-a>'
