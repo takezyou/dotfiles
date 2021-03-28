@@ -229,8 +229,14 @@ tnoremap <C-w><C-e> <C-w>:WinResizerStartResize<CR>
 tnoremap <C-g> <C-w>.
 
 " 上下の空白に移動
-nnoremap <C-j> }
-nnoremap <C-k> {
+" nnoremap <C-j> }
+" nnoremap <C-k> {
+
+" ウィンド移動
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " バッファ一覧
 nnoremap gb :Buffers<CR>
