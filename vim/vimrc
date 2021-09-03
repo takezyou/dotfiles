@@ -122,6 +122,9 @@ set synmaxcol=256
 " カーソルラインを表示する
 "set cursorline
 
+" 自動でファイルの更新を反映
+set autoread
+
 " https://vim-jp.org/vimdoc-ja/options.html#'wildmode'
 " wildmenuを有効にする
 set wildmenu
