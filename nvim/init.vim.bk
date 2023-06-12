@@ -1,0 +1,295 @@
+"
+" takezyou init.vim
+"
+
+" dein.vim
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:rc_dir = expand('~/.vim')
+
+if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+endif
+execute 'set runtimepath+=' . s:dein_repo_dir
+
+if dein#load_state(s:dein_dir)
+    call dein#begin(s:dein_dir)
+
+    " .toml file
+    if !isdirectory(s:rc_dir)
+    	call mkdir(s:rc_dir, 'p')
+    endif
+    let s:toml = s:rc_dir . '/dein.toml'
+    let s:lazy_toml = s:rc_dir . '/dein_lazy.toml'
+
+    " read toml and cache
+    call dein#load_toml(s:toml, {'lazy': 0})
+    call dein#load_toml(s:lazy_toml, {'lazy': 1})
+
+    " end settings
+    call dein#end()
+    call dein#save_state()
+endif
+
+if dein#check_install()
+    call dein#install()
+endif
+
+let s:removed_plugins = dein#check_clean()
+if len(s:removed_plugins) > 0
+	call map(s:removed_plugins, "delete(v:val, 'rf')")
+	call dein#recache_runtimepath()
+endif
+
+
+"
+" general settings
+"
+
+
+" ミュート
+set belloff=all
+
+" Leaderキーをスペースに設定
+let g:mapleader = "\<Space>"
+
+" シンタックスを有効にする
+syntax enable
+
+" カラースキームを使う
+colorscheme tender
+
+" バックスペースとCtrl+hで削除を有効にする
+set backspace=2
+
+" 改行時自動インデント
+set smartindent
+set autoindent
+
+" 自動インデントの空白の数
+set shiftwidth=4
+
+" 行番号を表示
+set number
+
+" https://vim-jp.org/vimdoc-ja/options.html#'tabstop'
+" タブでも常に空白を挿入
+set tabstop=4
+
+" インクリメントサーチを有効にする
+set incsearch
+
+" https://vim-jp.org/vimdoc-ja/options.html#'ignorecase'
+" 検索時大文字小文字を区別しない
+" set ignorecase
+
+" ハイライトサーチを有効にする
+set hlsearch
+
+" undoできる最大数
+set undolevels=10000
+
+" mac os のクリップボードを共有
+set clipboard+=unnamed
+
+" カーソルが常に中央に来るようにする
+set scrolloff=100
+
+" マクロで効果発揮
+set lazyredraw
+set ttyfast
+
+" 一行が長いファイルをsyntaxを制御することで軽くする
+set synmaxcol=256
+
+" 自動でファイルの更新を反映
+set autoread
+
+" wildmenuを有効にする
+set wildmenu
+
+" カーソルラインの位置を保存する
+augroup cursorlineRestore
+	autocmd!
+	autocmd BufReadPost *
+				\ if line("'\"") > 0 && line("'\"") <= line("$") |
+				\   exe "normal! g'\"" |
+				\ endif
+augroup END
+
+" undoの保存先
+if has('persistent_undo')
+	let undo_path = expand('~/.vim/undo')
+	exe 'set undodir=' .. undo_path
+	set undofile
+endif
+
+" 矩形選択時に文字の無いところまで選択範囲を広げる
+set virtualedit=block
+
+" ヘルプの言語を日本語優先にする
+set helplang=ja
+
+"
+set autowrite
+
+" swapファイルを作成しない
+set noswapfile
+
+" タブを常に表示
+set showtabline=2
+
+"
+" key mappings
+"
+
+" ファイル保存と終了
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :qa!<CR>
+nnoremap <Leader>wq :wqa!<CR>
+
+" 検索
+nnoremap <C-G><C-G> :Ggrep <C-R><C-W><CR><CR>
+
+" 置換
+nnoremap <Leader>re :%s;\<<C-R><C-W>\>;g<Left><Left>;
+
+" visualで選択したテキストを置換する
+vnoremap <Leader>re y:%s;<C-r>=substitute(@", "<C-v><NL>", "\\\\n", "g")<CR>;;g<Left><Left>
+
+" ハイライトを削除する
+nnoremap <Esc><Esc> :nohlsearch<CR>
+
+" 行先頭と行末
+noremap H ^
+noremap L $
+
+" タブ切り替え
+nnoremap <C-w>l gt
+nnoremap <C-w>h gT
+
+" ターミナルを垂直で開く
+" nnoremap <C-s>v :vert terminal ++close<CR>
+
+" ターミナルを水平で開く
+" nnoremap <C-s> <cmd>belowright new +15<CR><cmd>terminal<CR>
+
+" ターミナルを新しいタブページで開く
+" nnoremap <C-s>t :tab terminal ++close<CR>
+
+" ターミナルを新しいタブページで開く
+" nnoremap <C-s>g :tab terminal ++close grv<CR>
+
+" ターミナルノーマルモード
+"tnoremap <C-w>n <C-w>N
+
+" ターミナルでウィンドウ移動
+" tnoremap <silent> <C-w>h <C-w>:tabprevious<CR>
+" tnoremap <silent> <C-w>l <C-w>:tabnext<CR>
+
+tnoremap <C-w>N <C-\><C-n>
+tnoremap <C-W>n       <cmd>new<cr>
+tnoremap <C-W><C-N>   <cmd>new<cr>
+tnoremap <C-W>q       <cmd>quit<cr>
+tnoremap <C-W><C-Q>   <cmd>quit<cr>
+tnoremap <C-W>c       <cmd>close<cr>
+tnoremap <C-W>o       <cmd>only<cr>
+tnoremap <C-W><C-O>   <cmd>only<cr>
+tnoremap <C-W><Down>  <cmd>wincmd j<cr>
+tnoremap <C-W><C-J>   <cmd>wincmd j<cr>
+tnoremap <C-W>j       <cmd>wincmd j<cr>
+tnoremap <C-W><Up>    <cmd>wincmd k<cr>
+tnoremap <C-W><C-K>   <cmd>wincmd k<cr>
+tnoremap <C-W>k       <cmd>wincmd k<cr>
+tnoremap <C-W><Left>  <cmd>wincmd h<cr>
+tnoremap <C-W><C-H>   <cmd>wincmd h<cr>
+tnoremap <C-W><BS>    <cmd>wincmd h<cr>
+tnoremap <C-W>h       <cmd>wincmd h<cr>
+tnoremap <C-W><Right> <cmd>wincmd l<cr>
+tnoremap <C-W><C-L>   <cmd>wincmd l<cr>
+tnoremap <C-W>l       <cmd>wincmd l<cr>
+tnoremap <C-W>w       <cmd>wincmd w<cr>
+tnoremap <C-W><C-W>   <cmd>wincmd w<cr>
+tnoremap <C-W>W       <cmd>wincmd W<cr>
+tnoremap <C-W>t       <cmd>wincmd t<cr>
+tnoremap <C-W><C-T>   <cmd>wincmd t<cr>
+tnoremap <C-W>b       <cmd>wincmd b<cr>
+tnoremap <C-W><C-B>   <cmd>wincmd b<cr>
+tnoremap <C-W>p       <cmd>wincmd p<cr>
+tnoremap <C-W><C-P>   <cmd>wincmd p<cr>
+tnoremap <C-W>P       <cmd>wincmd P<cr>
+tnoremap <C-W>r       <cmd>wincmd r<cr>
+tnoremap <C-W><C-R>   <cmd>wincmd r<cr>
+tnoremap <C-W>R       <cmd>wincmd R<cr>
+tnoremap <C-W>x       <cmd>wincmd x<cr>
+tnoremap <C-W><C-X>   <cmd>wincmd x<cr>
+tnoremap <C-W>K       <cmd>wincmd K<cr>
+tnoremap <C-W>J       <cmd>wincmd J<cr>
+tnoremap <C-W>H       <cmd>wincmd H<cr>
+tnoremap <C-W>L       <cmd>wincmd L<cr>
+tnoremap <C-W>T       <cmd>wincmd T<cr>
+tnoremap <C-W>=       <cmd>wincmd =<cr>
+tnoremap <C-W>-       <cmd>wincmd -<cr>
+tnoremap <C-W>+       <cmd>wincmd +<cr>
+tnoremap <C-W>z       <cmd>pclose<cr>
+tnoremap <C-W><C-Z>   <cmd>pclose<cr>
+" ウィンドウリサイズ開始
+"tnoremap <C-w><C-e> <C-w>:WinResizerStartResize<CR>
+
+" Ctrl-hを有効化
+" tnoremap <C-h> <Del>
+
+" 単語削除
+tnoremap <C-g> <C-w>.
+
+" 上下の空白に移動
+" nnoremap <C-j> }
+" nnoremap <C-k> {
+
+" ウィンド移動
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" バッファ一覧
+nnoremap gb :Buffers<CR>
+
+" コマンドラインで単語移動
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <C-a> <Home>
+
+"
+" insert mode: Emacs like = terminal like
+" 
+
+" 文字単位移動
+inoremap <silent> <C-b> <Left>
+inoremap <silent> <C-f> <Right>
+
+" 行頭に移動
+inoremap <silent> <C-a> <Home>
+
+" 行末に移動
+inoremap <silent> <C-e> <End>
+
+"
+" vim plugins
+"
+
+" ligthline
+set laststatus=3
+if !has('gui_running')
+	set t_Co=258
+endif
+
+" vim-gitgutter
+set updatetime=100
+
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
