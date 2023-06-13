@@ -41,6 +41,7 @@ require("packer").startup(function()
   use "nvim-telescope/telescope-file-browser.nvim"
   use "MunifTanjim/nui.nvim"
   use "nvim-neo-tree/neo-tree.nvim"
+  use "mrbjarksen/neo-tree-diagnostics.nvim"
   use "nvim-tree/nvim-web-devicons"
   use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
   use "Yggdroot/indentLine"

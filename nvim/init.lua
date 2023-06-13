@@ -1,10 +1,7 @@
 -- plugins
-require "plugins"
-
--- defalut
+require "plugins" -- defalut
 vim.g.mapleader=' '
-vim.opt.shiftwidth=4
-vim.opt.shiftwidth = 4 
+vim.opt.shiftwidth = 2
 vim.opt.tabstop = 4 
 vim.opt.expandtab = true 
 vim.opt.autoindent = true
@@ -15,6 +12,7 @@ vim.opt.number=true
 vim.opt.clipboard="unnamedplus"
 vim.opt.laststatus = 3
 vim.opt.splitkeep = "screen"
+vim.opt.termguicolors = true
 
 vim.cmd[[colorscheme tokyonight-moon]]
 
@@ -25,10 +23,40 @@ require("mason-lspconfig").setup()
 -- neo-tree
 require("neo-tree").setup({
   open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
+  close_if_last_window = true,
+  default_component_configs = {
+    icon = {
+      folder_closed = "",
+      folder_open = "",
+      folder_empty = "",
+    },
+  },
+  sources = {
+    'filesystem',
+    'buffers',
+    'git_status',
+    'diagnostics',
+  },
+  filesystem = {
+    filtered_items = {
+      visible = true,
+      show_hidden_count = true,
+      hide_dotfiles = false,
+      hide_gitignored = true,
+      hide_by_name = {
+        '.git',
+        '.DS_Store',
+      },
+      never_show = {},
+    },
+  },
 })
 
-vim.keymap.set("n", "<C-n>", ":NeoTreeShowToggle", { silent = true })
-vim.keymap.set("n", "<leader>n", ":NeoTreeFocus", { silent = true })
+vim.keymap.set("n", "<C-n>", ":NeoTreeShowToggle<CR>", { silent = true })
+vim.keymap.set("n", "<leader>n", ":NeoTreeFocus<CR>", { silent = true })
+
+-- symbols-outline
+require("symbols-outline").setup()
 
 -- null-ls
 local null_ls = require("null-ls")
@@ -138,6 +166,20 @@ vim.keymap.set('n', '<C-b>', builtin.buffers, {})
 
 -- noice
 require("noice").setup({
+  cmdline = {
+    format = {
+      search_down = { icon = " " },
+      search_up = { icon = " " },
+    },
+  },
+  lsp = {
+    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+    override = {
+      ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+      ["vim.lsp.util.stylize_markdown"] = true,
+      ["cmp.entry.get_documentation"] = true,
+    },
+  },
   presets = {
     bottom_search = false, 
     command_palette = false,
@@ -187,7 +229,7 @@ require("edgy").setup({
       size = { height = 0.7 },
     },
     {
-      title = "  GIT",
+      title = "  GIT",
       ft = "neo-tree",
       filter = function(buf)
         return vim.b[buf].neo_tree_source == "git_status"
@@ -205,12 +247,13 @@ require("edgy").setup({
       open = "Neotree position=top buffers",
     },
     {
-      ft = "裂 DIAGNOSTICS",
+      title = "  DIAGNOSTICS",
+      ft = "neo-tree",
       filter = function(buf)
         return vim.b[buf].neo_tree_source == "diagnostics"
       end,
       pinned = true,
-      open = "Neotree position=right diagnostics",
+      open = "Neotree position=right source=diagnostics",
     },
     {
       title = "  OUTLINE",
